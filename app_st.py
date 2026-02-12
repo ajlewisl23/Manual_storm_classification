@@ -10,11 +10,7 @@ import pandas as pd
 # -----------------------
 # Configuration
 # -----------------------
-from pathlib import Path
-
-BASE_DIR = Path(__file__).parent
-root_dir = BASE_DIR / "storm_images_cleaned"
-#root_dir = "/home/eeajl/Documents/Data and Outputs/storm_images_cleaned"
+root_dir = "/home/eeajl/Documents/Data and Outputs/storm_images_cleaned"
 fnames = os.listdir(root_dir)
 ls = fnames[0:5]   # subset like your original
 
@@ -105,12 +101,6 @@ selection = st.radio(
     key=radio_key
 )
 
-#selection = st.radio(
-#    "Storm Type:",
-#    storm_options,
-#    index=storm_options.index(selected_label) if selected_label in storm_options else None
-#)
-
 if selection:
     st.session_state.selected_value[str(img_ID)] = selection
 
@@ -127,23 +117,24 @@ st.pyplot(fig)
 # -----------------------
 # Save Labels
 # -----------------------
-if st.button("Finished? => Click to Save Labels"):
-    df = pd.DataFrame.from_dict(
-        st.session_state.selected_value,
-        orient="index",
-        columns=["label"]
-    )
-    df.to_csv("storm_labels.csv")
-    st.success("Labels saved.")
+#if st.button("Finished? => Click to Save Labels"):
+#    df = pd.DataFrame.from_dict(
+#        st.session_state.selected_value,
+#        orient="index",
+#        columns=["label"]
+#    )
+#    df.to_csv("storm_labels.csv")
+#    st.success("Labels saved.")
 
-# -----------------------
-# Download Button 
-# -----------------------
-#csv = df.to_csv(index=True).encode("utf-8")
+df = pd.DataFrame([
+    {"storm_ID": k.split(',')[0][1:], "frame_no": k.split(',')[1][:-1], "user_label": v} 
+    for k, v in st.session_state.selected_value.items()
+])
+df.to_csv("storm_labels.csv", index=False)
 
-#st.download_button(
-#    label="Download Labels CSV",
-#    data=csv,
-#    file_name="storm_labels.csv",
-#    mime="text/csv",
-#)
+st.download_button(
+    label="Download Labels as CSV",
+    data=df.to_csv(index=False),
+    file_name="storm_labels.csv",
+    mime="text/csv"
+)
