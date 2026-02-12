@@ -5,6 +5,8 @@ import os
 from pathlib import Path
 import pandas as pd
 from pathlib import Path
+import datetime
+from github import Github
 
 # -----------------------
 # Configuration
@@ -27,7 +29,8 @@ if "selected_value" not in st.session_state:
 # -----------------------
 # Helper Functions
 # -----------------------
-def get_img_id(filename):
+def get_img_id(filename):from github import Github
+import pandas as pd
     return (
         int(filename.split('_')[1]),
         int(filename.split('_')[3][:-4])
@@ -118,24 +121,44 @@ st.pyplot(fig)
 # -----------------------
 # Save Labels
 # -----------------------
-#if st.button("Finished? => Click to Save Labels"):
-#    df = pd.DataFrame.from_dict(
-#        st.session_state.selected_value,
-#        orient="index",
-#        columns=["label"]
-#    )
-#    df.to_csv("storm_labels.csv")
-#    st.success("Labels saved.")
-
 df = pd.DataFrame([
     {"storm_ID": k.split(',')[0][1:], "frame_no": k.split(',')[1][:-1], "user_label": v} 
     for k, v in st.session_state.selected_value.items()
 ])
-df.to_csv("storm_labels.csv", index=False)
+#df.to_csv("storm_labels.csv", index=False)
+
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+
+# Load GitHub secrets
+import streamlit as st
+token = st.secrets["github_token"]
+repo_owner = st.secrets["repo_owner"]
+repo_name = st.secrets["repo_name"]
+
+# Example DataFrame
+df = pd.DataFrame.from_dict(st.session_state.selected_value, orient="index", columns=["label"])
+
+# Convert to CSV string
+csv_content = df.to_csv(index=False)
+
+# Connect to GitHub
+g = Github(token)
+repo = g.get_user(repo_owner).get_repo(repo_name)
+
+# Push file
+unique_filename = f"storm_labels_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+
+repo.create_file(
+    path=unique_filename,
+    message=f"Add new storm labels {unique_filename}",
+    content=csv_content
+)
+
+st.success(f"Saved to GitHub as {unique_filename}")
 
 st.download_button(
     label="Download Labels as CSV",
     data=df.to_csv(index=False),
-    file_name="storm_labels.csv",
+    file_name=f"storm_labels_{timestamp}.csv",
     mime="text/csv"
 )
