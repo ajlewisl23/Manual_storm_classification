@@ -130,7 +130,6 @@ df = pd.DataFrame([
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
 # Load GitHub secrets
-import streamlit as st
 token = st.secrets["github_token"]
 repo_owner = st.secrets["repo_owner"]
 repo_name = st.secrets["repo_name"]
@@ -156,9 +155,9 @@ repo.create_file(
 
 st.success(f"Saved to GitHub as {unique_filename}")
 
-st.download_button(
-    label="Download Labels as CSV",
-    data=df.to_csv(index=False),
-    file_name=f"storm_labels_{timestamp}.csv",
-    mime="text/csv"
-)
+#st.download_button(
+#    label="Download Labels as CSV",
+#    data=df.to_csv(index=False),
+#    file_name=f"storm_labels_{timestamp}.csv",
+#    mime="text/csv"
+#)
