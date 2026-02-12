@@ -139,11 +139,11 @@ if st.button("Finished? => Click to Save Labels"):
 # -----------------------
 # Download Button 
 # -----------------------
-csv = df.to_csv(index=True).encode("utf-8")
+#csv = df.to_csv(index=True).encode("utf-8")
 
-st.download_button(
-    label="Download Labels CSV",
-    data=csv,
-    file_name="storm_labels.csv",
-    mime="text/csv",
-)
+#st.download_button(
+#    label="Download Labels CSV",
+#    data=csv,
+#    file_name="storm_labels.csv",
+#    mime="text/csv",
+#)
