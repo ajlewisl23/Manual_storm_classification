@@ -135,3 +135,15 @@ if st.button("Finished? => Click to Save Labels"):
     )
     df.to_csv("storm_labels.csv")
     st.success("Labels saved.")
+
+# -----------------------
+# Download Button 
+# -----------------------
+csv = df.to_csv(index=True).encode("utf-8")
+
+st.download_button(
+    label="Download Labels CSV",
+    data=csv,
+    file_name="storm_labels.csv",
+    mime="text/csv",
+)
