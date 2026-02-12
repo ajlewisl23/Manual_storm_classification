@@ -10,7 +10,11 @@ import pandas as pd
 # -----------------------
 # Configuration
 # -----------------------
-root_dir = "/home/eeajl/Documents/Data and Outputs/storm_images_cleaned"
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
+root_dir = BASE_DIR / "storm_images_cleaned"
+#root_dir = "/home/eeajl/Documents/Data and Outputs/storm_images_cleaned"
 fnames = os.listdir(root_dir)
 ls = fnames[0:5]   # subset like your original
 
