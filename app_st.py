@@ -148,7 +148,7 @@ g = Github(token)
 repo = g.get_user(repo_owner).get_repo(repo_name)
 
 # Push file
-unique_filename = f"storm_labels_{user_id}_{timestamp.strftime('%Y%m%d_%H%M%S')}.csv"
+unique_filename = f"user_classifications/storm_labels_{user_id}_{timestamp.strftime('%Y%m%d_%H%M%S')}.csv"
 
 repo.create_file(
     path=unique_filename,
