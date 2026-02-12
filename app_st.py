@@ -29,8 +29,7 @@ if "selected_value" not in st.session_state:
 # -----------------------
 # Helper Functions
 # -----------------------
-def get_img_id(filename):from github import Github
-import pandas as pd
+def get_img_id(filename):
     return (
         int(filename.split('_')[1]),
         int(filename.split('_')[3][:-4])
