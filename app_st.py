@@ -1,16 +1,17 @@
-#!/usr/bin/env python3
-
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 import os
 from pathlib import Path
 import pandas as pd
+from pathlib import Path
 
 # -----------------------
 # Configuration
 # -----------------------
-root_dir = "/home/eeajl/Documents/Data and Outputs/storm_images_cleaned"
+
+BASE_DIR = Path(__file__).parent
+root_dir = BASE_DIR / "storm_images_cleaned"
 fnames = os.listdir(root_dir)
 ls = fnames[0:5]   # subset like your original
 
