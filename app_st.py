@@ -7,6 +7,13 @@ import pandas as pd
 from pathlib import Path
 import datetime
 from github import Github
+import uuid
+
+if "user_id" not in st.session_state:
+    st.session_state.user_id = str(uuid.uuid4())[:8]  # short unique ID
+
+user_id = st.session_state.user_id
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
 # -----------------------
 # Configuration
@@ -124,9 +131,6 @@ df = pd.DataFrame([
     {"storm_ID": k.split(',')[0][1:], "frame_no": k.split(',')[1][:-1], "user_label": v} 
     for k, v in st.session_state.selected_value.items()
 ])
-#df.to_csv("storm_labels.csv", index=False)
-
-timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
 # Load GitHub secrets
 token = st.secrets["github_token"]
@@ -144,7 +148,7 @@ g = Github(token)
 repo = g.get_user(repo_owner).get_repo(repo_name)
 
 # Push file
-unique_filename = f"storm_labels_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+unique_filename = f"storm_labels_{user_id}_{timestamp.strftime('%Y%m%d_%H%M%S')}.csv"
 
 repo.create_file(
     path=unique_filename,
