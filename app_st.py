@@ -7,6 +7,7 @@ import pandas as pd
 from pathlib import Path
 import datetime
 from github import Github
+from github import Auth
 import uuid
 
 if "user_id" not in st.session_state:
@@ -144,8 +145,10 @@ df = pd.DataFrame.from_dict(st.session_state.selected_value, orient="index", col
 csv_content = df.to_csv(index=False)
 
 # Connect to GitHub
-auth=github.Auth.Token(...)
-# g = Github(token)
+auth = Auth.Token("access_token")
+
+# Public Web Github
+g = Github(auth=auth)
 repo = auth.get_user(repo_owner).get_repo(repo_name)
 
 # Push file
