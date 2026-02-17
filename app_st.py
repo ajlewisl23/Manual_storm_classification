@@ -156,7 +156,39 @@ repo.create_file(
     content=csv_content
 )
 
-st.success(f"Saved to GitHub as {unique_filename}")
+# -----------------------
+# Save Labels Button
+# -----------------------
+
+if st.button("Submit Labels"):
+
+    # Convert session state to DataFrame
+    df = pd.DataFrame.from_dict(
+        st.session_state.selected_value,
+        orient="index",
+        columns=["label"]
+    )
+
+    csv_content = df.to_csv(index=False)
+
+    # Load GitHub secrets
+    token = st.secrets["github_token"]
+    repo_owner = st.secrets["repo_owner"]
+    repo_name = st.secrets["repo_name"]
+
+    # Connect to GitHub
+    g = Github(token)
+    repo = g.get_user(repo_owner).get_repo(repo_name)
+
+    unique_filename = f"user_classifications/storm_labels_{user_id}_{timestamp}.csv"
+
+    repo.create_file(
+        path=unique_filename,
+        message=f"Add storm labels from user {user_id}",
+        content=csv_content
+    )
+
+    st.success(f"✅ Saved to GitHub as {unique_filename}")
 
 #st.download_button(
 #    label="Download Labels as CSV",
