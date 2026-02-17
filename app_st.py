@@ -138,6 +138,8 @@ token = st.secrets["github_token"]
 repo_owner = st.secrets["repo_owner"]
 repo_name = st.secrets["repo_name"]
 
+st.write("Token starts with:", token[:4])
+
 # Example DataFrame
 df = pd.DataFrame.from_dict(st.session_state.selected_value, orient="index", columns=["label"])
 
