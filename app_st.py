@@ -149,7 +149,7 @@ auth = Auth.Token("access_token")
 
 # Public Web Github
 g = Github(auth=auth)
-repo = auth.get_user(repo_owner).get_repo(repo_name)
+repo = g.get_user(repo_owner).get_repo(repo_name)
 
 # Push file
 unique_filename = f"user_classifications/storm_labels_{user_id}_{timestamp}.csv"
