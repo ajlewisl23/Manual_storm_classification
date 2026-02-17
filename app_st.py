@@ -174,11 +174,11 @@ repo_name = st.secrets["repo_name"]
 if st.button("Submit Labels"):
 
     # Convert session state to DataFrame
-    df = pd.DataFrame.from_dict(
-        st.session_state.selected_value,
-        orient="index",
-        columns=["label"]
-    )
+    #df = pd.DataFrame.from_dict(
+    #    st.session_state.selected_value,
+    #    orient="index",
+    #    columns=["label"]
+    #)
 
     csv_content = df.to_csv(index=False)
 
