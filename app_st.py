@@ -23,7 +23,7 @@ timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 BASE_DIR = Path(__file__).parent
 root_dir = BASE_DIR / "storm_images_cleaned"
 fnames = os.listdir(root_dir)
-ls = fnames   # subset like your original
+ls = fnames[0:5]   # subset like your original
 
 # -----------------------
 # Session State Setup
