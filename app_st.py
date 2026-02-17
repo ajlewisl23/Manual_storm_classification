@@ -182,7 +182,8 @@ if st.button("Submit Labels"):
 
     # Connect to GitHub
     g = Github(token)
-    repo = g.get_user(repo_owner).get_repo(repo_name)
+    #repo = g.get_user(repo_owner).get_repo(repo_name)
+    repo = g.get_repo(f"{repo_owner}/{repo_name}")
 
     unique_filename = f"user_classifications/storm_labels_{user_id}_{timestamp}.csv"
 
