@@ -10,6 +10,8 @@ from github import Github
 from github import Auth
 import uuid
 
+username = st.text_input("Enter GitHub username")
+
 if "user_id" not in st.session_state:
     st.session_state.user_id = str(uuid.uuid4())[:8]  # short unique ID
 
@@ -58,7 +60,7 @@ col1, col2 = st.columns(2)
 with col1:
     st.button("Previous", on_click=prev_image)
 with col2:
-    st.button("Next", on_click=next_image)
+    st.button("Next", on_click=next_image)username = st.text_input("Enter GitHub username")
 
 # -----------------------
 # Load Current Image
@@ -192,7 +194,7 @@ if st.button("Submit Labels"):
     #repo = g.get_user(repo_owner).get_repo(repo_name)
     repo = g.get_repo(f"{repo_owner}/{repo_name}")
 
-    unique_filename = f"user_classifications/storm_labels_{user_id}_{timestamp}.csv"
+    unique_filename = f"user_classifications/storm_labels_{username}_{user_id}_{timestamp}.csv"
 
     repo.create_file(
         path=unique_filename,
