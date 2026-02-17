@@ -144,8 +144,9 @@ df = pd.DataFrame.from_dict(st.session_state.selected_value, orient="index", col
 csv_content = df.to_csv(index=False)
 
 # Connect to GitHub
-g = Github(token)
-repo = g.get_user(repo_owner).get_repo(repo_name)
+auth=github.Auth.Token(...)
+# g = Github(token)
+repo = auth.get_user(repo_owner).get_repo(repo_name)
 
 # Push file
 unique_filename = f"user_classifications/storm_labels_{user_id}_{timestamp}.csv"
