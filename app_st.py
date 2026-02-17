@@ -10,7 +10,7 @@ from github import Github
 from github import Auth
 import uuid
 
-username = st.text_input("Enter GitHub username")
+username = st.text_input("Please enter your name (for saving your labels)")
 
 if "user_id" not in st.session_state:
     st.session_state.user_id = str(uuid.uuid4())[:8]  # short unique ID
