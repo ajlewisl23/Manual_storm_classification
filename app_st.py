@@ -143,16 +143,16 @@ repo_name = st.secrets["repo_name"]
 
 #print(g.get_user().login)
 
-st.write("Token starts with:", token[:4])
+#st.write("Token starts with:", token[:4])
 
 # Example DataFrame
-df = pd.DataFrame.from_dict(st.session_state.selected_value, orient="index", columns=["label"])
+#df = pd.DataFrame.from_dict(st.session_state.selected_value, orient="index", columns=["label"])
 
 # Convert to CSV string
-csv_content = df.to_csv(index=False)
+#csv_content = df.to_csv(index=False)
 
 # Connect to GitHub
-auth = Auth.Token("access_token")
+#auth = Auth.Token("access_token")
 
 # Public Web Github
 #g = Github(auth=auth)
