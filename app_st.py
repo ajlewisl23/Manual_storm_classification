@@ -138,8 +138,8 @@ token = st.secrets["github_token"]
 repo_owner = st.secrets["repo_owner"]
 repo_name = st.secrets["repo_name"]
 
-token = "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"
-g = Github(token)
+#token = "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"
+#g = Github(token)
 
 print(g.get_user().login)
 
