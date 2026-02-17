@@ -155,17 +155,17 @@ csv_content = df.to_csv(index=False)
 auth = Auth.Token("access_token")
 
 # Public Web Github
-g = Github(auth=auth)
+#g = Github(auth=auth)
 # repo = g.get_user(repo_owner).get_repo(repo_name)
 
 # Push file
-unique_filename = f"user_classifications/storm_labels_{user_id}_{timestamp}.csv"
+#unique_filename = f"user_classifications/storm_labels_{user_id}_{timestamp}.csv"
 
-repo.create_file(
-    path=unique_filename,
-    message=f"Add new storm labels {unique_filename}",
-    content=csv_content
-)
+#repo.create_file(
+#    path=unique_filename,
+#    message=f"Add new storm labels {unique_filename}",
+#    content=csv_content
+#)
 
 # -----------------------
 # Save Labels Button
