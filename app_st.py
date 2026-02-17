@@ -60,8 +60,7 @@ col1, col2 = st.columns(2)
 with col1:
     st.button("Previous", on_click=prev_image)
 with col2:
-    st.button("Next", on_click=next_image)username = st.text_input("Enter GitHub username")
-
+    st.button("Next", on_click=next_image)
 # -----------------------
 # Load Current Image
 # -----------------------
@@ -169,7 +168,7 @@ repo_name = st.secrets["repo_name"]
 #    content=csv_content
 #)
 
-# -----------------------
+# -----------------------username = st.text_input("Enter GitHub username")
 # Save Labels Button
 # -----------------------
 
