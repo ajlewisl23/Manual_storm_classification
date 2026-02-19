@@ -54,6 +54,13 @@ def prev_image():
 st.title("MCS Storm Classification")
 
 # -----------------------
+# Load Current Image
+# -----------------------
+current_file = ls[st.session_state.index]
+img = np.load(f"{root_dir}/{current_file}")
+img_ID = get_img_id(current_file)
+
+# -----------------------
 # Plot
 # -----------------------
 fig, ax = plt.subplots()
@@ -81,12 +88,6 @@ with col1:
     st.button("Previous", on_click=prev_image)
 with col2:
     st.button("Next", on_click=next_image)
-# -----------------------
-# Load Current Image
-# -----------------------
-current_file = ls[st.session_state.index]
-img = np.load(f"{root_dir}/{current_file}")
-img_ID = get_img_id(current_file)
 
 # -----------------------
 # Radio Buttons
