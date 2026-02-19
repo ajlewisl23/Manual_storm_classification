@@ -79,6 +79,8 @@ ax.set_aspect("equal")
 selected_label = st.session_state.selected_value.get(str(img_ID), None)
 ax.set_title(f"Storm ID {img_ID}\nSelected: {selected_label}")
 
+st.pyplot(fig)
+
 # -----------------------
 # Layout
 # -----------------------
@@ -126,7 +128,6 @@ progress = num_labelled / len(ls)
 
 st.progress(progress)
 st.write(f"Labelled: {num_labelled}/{len(ls)}")
-st.pyplot(fig)
 
 # -----------------------
 # Save Labels
